@@ -43,7 +43,7 @@ function DisplayCandidats() {
     console.log("3. Filter by party");
 
     const choix = prompt("Choose an option: ");
-    if (choix === "1"){
+    if (choix === "1") {
         for (let i = 0; i < candidats.length; i++) {
             console.log(
                 "CIN:", candidats[i].cin,
@@ -54,8 +54,56 @@ function DisplayCandidats() {
                 "Votes:", candidats[i].electeurs.length
             );
         }
+    }
+    else if (choix === "2") {
+
+        for (let i = 0; i < candidats.length; i++) {
+
+            let max = i;
+
+            for (let j = i + 1; j < candidats.length; j++) {
+
+                if (candidats[j].electeurs.length > candidats[max].electeurs.length) {
+                    max = j;
+                }
+            }
+
+            let temp = candidats[i];
+            candidats[i] = candidats[max];
+            candidats[max] = temp;
         }
 
+        for (let i = 0; i < candidats.length; i++) {
+
+            console.log(
+                "CIN:", candidats[i].cin,
+                "Name:", candidats[i].nom,
+                "First name:", candidats[i].prenom,
+                "Party:", candidats[i].partiPolitique,
+                "Age:", candidats[i].age,
+                "Votes:", candidats[i].electeurs.length
+            );
+        }
+    }
+    else if (choix === "3") {
+
+        const party = prompt("Enter political party: ");
+
+        for (let i = 0; i < candidats.length; i++) {
+
+            if (candidats[i].partiPolitique === party) {
+
+                console.log(
+                    "CIN:", candidats[i].cin,
+                    "Name:", candidats[i].nom,
+                    "First name:", candidats[i].prenom,
+                    "Party:", candidats[i].partiPolitique,
+                    "Age:", candidats[i].age,
+                    "Votes:", candidats[i].electeurs.length
+                );
+            }
+        }
+    }
 }
 
 
@@ -93,4 +141,3 @@ function menu() { }
 
 
 
-let totatl = candidats.filter(candidat => candidat.age)
