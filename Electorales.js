@@ -106,12 +106,85 @@ function DisplayCandidats() {
     }
 }
 
+function vote() {
 
-function voter() { }
-// Vote
+    const cinElecteur = prompt("Enter your CIN: ");
+    for (let i = 0; i < candidats.length; i++) {
 
-function ModifyCandidat() { }
-// Modify a candidate
+        for (let j = 0; j < candidats[i].electeurs.length; j++) {
+
+            if (candidats[i].electeurs[j] === cinElecteur) {
+
+                console.log(
+                    "You have already voted and you cannot modify your vote or vote again."
+                );
+
+                return;
+            }
+        }
+    }
+    const cinCandidat = prompt("Enter candidate CIN: ");
+    for (let i = 0; i < candidats.length; i++) {
+        if (candidats[i].cin === cinCandidat) {
+            candidats[i].electeurs.push(cinElecteur);
+
+            console.log("Vote registered successfully!");
+            return;
+        }
+    }
+
+    console.log("Candidate not found.");
+}
+
+
+function ModifyCandidat() { 
+const cin = prompt("Enter candidate CIN to modify: ");
+
+    for (let i = 0; i < candidats.length; i++) {
+
+        if (candidats[i].cin === cin) {
+
+            console.log("\nCandidate found.");
+
+            const nom = prompt(
+                `Enter new last name (${candidats[i].nom}): `
+            );
+
+            const prenom = prompt(
+                `Enter new first name (${candidats[i].prenom}): `
+            );
+
+            const partiPolitique = prompt(
+                `Enter new political party (${candidats[i].partiPolitique}): `
+            );
+
+            const age = Number(
+                prompt(`Enter new age (${candidats[i].age}): `)
+            );
+
+            if (nom !== "") {
+                candidats[i].nom = nom;
+            }
+
+            if (prenom !== "") {
+                candidats[i].prenom = prenom;
+            }
+
+            if (partiPolitique !== "") {
+                candidats[i].partiPolitique = partiPolitique;
+            }
+
+            if (!isNaN(age) && age > 0) {
+                candidats[i].age = age;
+            }
+
+            console.log("Candidate modified successfully!");
+            return;
+        }
+    }
+
+    console.log("Candidate not found.");
+}
 
 function DeleteCandidat() { }
 // Delete a candidate
