@@ -87,10 +87,6 @@ function addCandidat() {
         electeurs: []
     };
     candidats.push(newCandidat)
-
-    console.log(newCandidat);
-
-
 }
 
 function addMultipleCandidats() {
@@ -173,7 +169,7 @@ function voter() {
 
             if (candidats[i].electeurs[j] === cinElecteur) {
 
-                console.log("You have already voted!.");
+                console.log("You have already voted!");
 
                 return;
             }
@@ -283,6 +279,8 @@ function rechercherCandidat() {
             displayOneCandidat(candidats[i]);
 
             found = true;
+
+            break;
         }
     }
 
@@ -290,7 +288,6 @@ function rechercherCandidat() {
         console.log("No candidate found.");
     }
 }
-
 
 
 
@@ -311,39 +308,21 @@ function afficherStatistiques() {
 
     console.log("\n========== TOP 3 ==========");
 
-    const classement = [...candidats];
-
-    for (let i = 0; i < classement.length; i++) {
-
+    for (let i = 0; i < candidats.length; i++) {
         let max = i;
-
-        for (let j = i + 1; j < classement.length; j++) {
-
-            if (
-                classement[j].electeurs.length >
-                classement[max].electeurs.length
-            ) {
+        for (let j = i + 1; j < candidats.length; j++) {
+            if (candidats[j].electeurs.length >candidats[max].electeurs.length) {
                 max = j;
             }
         }
-
-        let temp = classement[i];
-
-        classement[i] = classement[max];
-
-        classement[max] = temp;
+        let temp = candidats[i];
+        candidats[i] = candidats[max];
+        candidats[max] = temp;
     }
 
-    let limite = 3;
-
-    if (classement.length < 3) {
-        limite = classement.length;
-    }
-
-    for (let i = 0; i < limite; i++) {
-
+    for (let i = 0; i < 3; i++){
         console.log(
-            `${i + 1}. ${classement[i].prenom} ${classement[i].nom} - ${classement[i].electeurs.length} votes`
+            `${i + 1}. ${candidats[i].prenom} ${candidats[i].nom} - ${candidats[i].electeurs.length} votes`
         );
     }
 
